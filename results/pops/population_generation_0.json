@@ -1,0 +1,8 @@
+[
+     {
+          "algorithm": "The algorithm selects the next task based on the highest profit-to-cost ratio among unprocessed tasks, considering the transition cost from the current task.",
+          "code": "import numpy as np\n\ndef select_next_task(current_task, next_task, unprocessed_task_ids, distance_matrix, profit_matrix):\n    max_ratio = -1\n    next_task_id = None\n    \n    for task_id in unprocessed_task_ids:\n        transition_cost = distance_matrix[current_task][task_id]\n        profit = profit_matrix[task_id]\n        \n        if transition_cost > 0:  # Avoid division by zero\n            profit_to_cost_ratio = profit / transition_cost\n            \n            if profit_to_cost_ratio > max_ratio:\n                max_ratio = profit_to_cost_ratio\n                next_task_id = task_id\n                \n    return next_task_id",
+          "objective": 85.93,
+          "other_inf": null
+     }
+]

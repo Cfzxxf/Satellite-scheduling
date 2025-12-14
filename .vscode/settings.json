@@ -1,0 +1,10 @@
+{
+    "python-envs.defaultEnvManager": "ms-python.python:conda",
+    "python-envs.defaultPackageManager": "ms-python.python:conda",
+    "python.defaultInterpreterPath": "C:\\ProgramData\\anaconda3\\python.exe",
+    "code-runner.executorMap": {
+    	// 加上-u（unbuffered）参数后会强制其标准输出也同标准错误一样不通过缓存直接打印到屏幕
+    "python": "set PYTHONIOENCODING=utf8 && $pythonPath -u $fullFileName",
+},
+"python-envs.pythonProjects": []
+}

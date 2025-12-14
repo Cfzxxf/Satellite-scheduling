@@ -1,0 +1,14 @@
+[
+     {
+          "algorithm": "This algorithm selects the next task based on a weighted score that considers task urgency, profit, processing time, and satellite resources, prioritizing tasks that maximize overall benefits while minimizing transition costs.",
+          "code": "import numpy as np\n\ndef select_next_task(current_task, next_task, unprocessed_task_ids, distance_matrix, profit_matrix):\n    urgency_threshold = 0.8  # Example threshold for urgency\n    max_profit = np.max(profit_matrix)\n    \n    def calculate_priority(task_id):\n        urgency_factor = 1 if task_id / len(profit_matrix) <= urgency_threshold else 0.5\n        profit_factor = profit_matrix[task_id]\n        transition_cost = distance_matrix[current_task][task_id]\n        score = (profit_factor * urgency_factor) / (1 + transition_cost)  # Weighted score\n        return score\n\n    best_score = -float('inf')\n    next_task_id = -1\n    \n    for task_id in unprocessed_task_ids:\n        score = calculate_priority(task_id)\n        if score > best_score:\n            best_score = score\n            next_task_id = task_id\n            \n    return next_task_id",
+          "objective": 84.91,
+          "other_inf": null
+     },
+     {
+          "algorithm": "A task selection algorithm that prioritizes unprocessed tasks based on their profit-to-distance ratio, while considering the urgency of tasks and the costs of transitioning from the current task to the next candidate task.",
+          "code": "import numpy as np\n\ndef select_next_task(current_task, next_task, unprocessed_task_ids, distance_matrix, profit_matrix):\n    max_score = -float('inf')\n    next_task_id = None\n    \n    current_task_id = current_task if isinstance(current_task, int) else current_task.id\n    \n    for task_id in unprocessed_task_ids:\n        transition_cost = distance_matrix[current_task_id][task_id]\n        profit = profit_matrix[task_id]\n        \n        # Avoid division by zero\n        if transition_cost > 0:\n            score = profit / transition_cost\n        else:\n            score = profit  # If no cost, take profit\n\n        if score > max_score:\n            max_score = score\n            next_task_id = task_id\n            \n    return next_task_id",
+          "objective": 85.93,
+          "other_inf": null
+     }
+]
